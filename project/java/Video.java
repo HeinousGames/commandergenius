@@ -67,6 +67,7 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.hardware.input.InputManager;
 
+import tv.ouya.console.api.OuyaController;
 
 class Mouse
 {
@@ -1045,7 +1046,7 @@ class DemoGLSurfaceView extends GLSurfaceView_SDL {
 	public boolean onKeyDown(int keyCode, final KeyEvent event)
 	{
 		//Log.v("SDL", "DemoGLSurfaceView::onKeyDown(): keyCode " + keyCode + " event.getSource() " + event.getSource());
-		if( keyCode == KeyEvent.KEYCODE_BACK )
+		if( keyCode == KeyEvent.KEYCODE_BACK || keyCode == OuyaController.BUTTON_A )
 		{
 			boolean mouseInput = false;
 			if( (event.getSource() & InputDevice.SOURCE_MOUSE) == InputDevice.SOURCE_MOUSE )
@@ -1076,7 +1077,7 @@ class DemoGLSurfaceView extends GLSurfaceView_SDL {
 	@Override
 	public boolean onKeyUp(int keyCode, final KeyEvent event)
 	{
-		if( keyCode == KeyEvent.KEYCODE_BACK )
+		if( keyCode == KeyEvent.KEYCODE_BACK || keyCode == OuyaController.BUTTON_A )
 		{
 			boolean mouseInput = false;
 			if( (event.getSource() & InputDevice.SOURCE_MOUSE) == InputDevice.SOURCE_MOUSE )

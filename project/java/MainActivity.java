@@ -100,6 +100,7 @@ import java.util.Arrays;
 import java.util.zip.ZipFile;
 import java.util.ArrayList;
 
+import tv.ouya.console.api.OuyaController;
 
 public class MainActivity extends Activity
 {
@@ -120,9 +121,9 @@ public class MainActivity extends Activity
 		Log.i("SDL", "libSDL: Creating startup screen");
 		_layout = new LinearLayout(this);
 		_layout.setOrientation(LinearLayout.VERTICAL);
-		_layout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
+		_layout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 		_layout2 = new LinearLayout(this);
-		_layout2.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+		_layout2.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 		loadingDialog = new ProgressDialog(this);
 		loadingDialog.setMessage(getString(R.string.accessing_network));
 
@@ -132,7 +133,7 @@ public class MainActivity extends Activity
 		{
 			_btn = new Button(this);
 			_btn.setEnabled(false);
-			_btn.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+			_btn.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 			_btn.setText(getResources().getString(R.string.device_change_cfg));
 			class onClickListener implements View.OnClickListener
 			{
@@ -165,7 +166,7 @@ public class MainActivity extends Activity
 		{
 			img.setImageResource(R.drawable.publisherlogo);
 		}
-		img.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
+		img.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 		_layout.addView(img);
 		
 		_videoLayout = new FrameLayout(this);
@@ -684,7 +685,7 @@ public class MainActivity extends Activity
 						{
 							public void onPress(int key)
 							{
-								if (key == KeyEvent.KEYCODE_BACK)
+								if (key == KeyEvent.KEYCODE_BACK || key == OuyaController.BUTTON_A)
 									return;
 								if (key < 0)
 									return;
@@ -702,7 +703,7 @@ public class MainActivity extends Activity
 							}
 							public void onRelease(int key)
 							{
-								if (key == KeyEvent.KEYCODE_BACK)
+								if (key == KeyEvent.KEYCODE_BACK || key == OuyaController.BUTTON_A)
 								{
 									builtinKeyboard.setOnKeyboardActionListener(null);
 									showScreenKeyboardWithoutTextInputField(0); // Hide keyboard
@@ -825,21 +826,39 @@ public class MainActivity extends Activity
 			simpleKeyListener(MainActivity parent) { _parent = parent; };
 			public boolean onKey(View v, int keyCode, KeyEvent event)
 			{
-				if ((event.getAction() == KeyEvent.ACTION_UP) && (
-					keyCode == KeyEvent.KEYCODE_ENTER ||
-					keyCode == KeyEvent.KEYCODE_BACK ||
-					keyCode == KeyEvent.KEYCODE_MENU ||
-					keyCode == KeyEvent.KEYCODE_BUTTON_A ||
-					keyCode == KeyEvent.KEYCODE_BUTTON_B ||
-					keyCode == KeyEvent.KEYCODE_BUTTON_X ||
-					keyCode == KeyEvent.KEYCODE_BUTTON_Y ||
-					keyCode == KeyEvent.KEYCODE_BUTTON_1 ||
-					keyCode == KeyEvent.KEYCODE_BUTTON_2 ||
-					keyCode == KeyEvent.KEYCODE_BUTTON_3 ||
-					keyCode == KeyEvent.KEYCODE_BUTTON_4 ))
-				{
-					_parent.hideScreenKeyboard();
-					return true;
+				if (_parent.isRunningOnOUYA()) {
+					if ((event.getAction() == KeyEvent.ACTION_UP) && (
+							keyCode == KeyEvent.KEYCODE_ENTER ||
+									keyCode == KeyEvent.KEYCODE_BACK ||
+									keyCode == KeyEvent.KEYCODE_MENU ||
+									keyCode == KeyEvent.KEYCODE_BUTTON_A ||
+									keyCode == KeyEvent.KEYCODE_BUTTON_X ||
+									keyCode == KeyEvent.KEYCODE_BUTTON_Y ||
+									keyCode == KeyEvent.KEYCODE_BUTTON_1 ||
+									keyCode == KeyEvent.KEYCODE_BUTTON_2 ||
+									keyCode == KeyEvent.KEYCODE_BUTTON_3 ||
+									keyCode == KeyEvent.KEYCODE_BUTTON_4 ))
+					{
+						_parent.hideScreenKeyboard();
+						return true;
+					}
+				} else {
+					if ((event.getAction() == KeyEvent.ACTION_UP) && (
+							keyCode == KeyEvent.KEYCODE_ENTER ||
+									keyCode == KeyEvent.KEYCODE_BACK ||
+									keyCode == KeyEvent.KEYCODE_MENU ||
+									keyCode == KeyEvent.KEYCODE_BUTTON_A ||
+									keyCode == KeyEvent.KEYCODE_BUTTON_B ||
+									keyCode == KeyEvent.KEYCODE_BUTTON_X ||
+									keyCode == KeyEvent.KEYCODE_BUTTON_Y ||
+									keyCode == KeyEvent.KEYCODE_BUTTON_1 ||
+									keyCode == KeyEvent.KEYCODE_BUTTON_2 ||
+									keyCode == KeyEvent.KEYCODE_BUTTON_3 ||
+									keyCode == KeyEvent.KEYCODE_BUTTON_4 ))
+					{
+						_parent.hideScreenKeyboard();
+						return true;
+					}
 				}
 				/*
 				if (keyCode == KeyEvent.KEYCODE_DEL || keyCode == KeyEvent.KEYCODE_CLEAR)

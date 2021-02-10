@@ -74,6 +74,7 @@ import android.hardware.SensorEvent;
 import android.hardware.Sensor;
 import android.widget.Toast;
 
+import tv.ouya.console.api.OuyaController;
 
 class SettingsMenuKeyboard extends SettingsMenu
 {
@@ -673,7 +674,7 @@ class SettingsMenuKeyboard extends SettingsMenu
 				layout.setOnTouchListener(this);
 				layout.setOnKeyListener(this);
 				boundary = new ImageView(p);
-				boundary.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
+				boundary.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 				boundary.setScaleType(ImageView.ScaleType.MATRIX);
 				boundaryBmp = BitmapFactory.decodeResource( p.getResources(), R.drawable.rectangle );
 				boundary.setImageBitmap(boundaryBmp);
@@ -710,7 +711,7 @@ class SettingsMenuKeyboard extends SettingsMenu
 					Log.i("SDL", "Screen kb button " + i + " coords " + Globals.ScreenKbControlsLayout[i][0] + ":" + Globals.ScreenKbControlsLayout[i][1] + ":" + Globals.ScreenKbControlsLayout[i][2] + ":" + Globals.ScreenKbControlsLayout[i][3] );
 
 					imgs[i] = new ImageView(p);
-					imgs[i].setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
+					imgs[i].setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 					imgs[i].setScaleType(ImageView.ScaleType.MATRIX);
 					bmps[i] = BitmapFactory.decodeResource( p.getResources(), buttons[i] );
 					imgs[i].setImageBitmap(bmps[i]);
@@ -725,9 +726,16 @@ class SettingsMenuKeyboard extends SettingsMenu
 				}
 				boundary.bringToFront();
 				if( currentButton == -1 )
-					onKey( null, KeyEvent.KEYCODE_BACK, null ); // All buttons disabled - do not show anything
-				else
+				{
+					if (p.isRunningOnOUYA()) {
+						onKey(null, OuyaController.BUTTON_A, null); // All buttons disabled - do not show anything
+					} else {
+						onKey(null, KeyEvent.KEYCODE_BACK, null); // All buttons disabled - do not show anything
+					}
+				}
+				else {
 					setupButton(currentButton);
+				}
 
 				final Button backButton = new Button(p);
 				backButton.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -855,7 +863,7 @@ class SettingsMenuKeyboard extends SettingsMenu
 			@Override
 			public boolean onKey(View v, int keyCode, KeyEvent event)
 			{
-				if( keyCode == KeyEvent.KEYCODE_BACK )
+				if( keyCode == KeyEvent.KEYCODE_BACK || keyCode == OuyaController.BUTTON_A )
 				{
 					p.getVideoLayout().removeView(layout);
 					layout = null;
