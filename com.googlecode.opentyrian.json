@@ -1,0 +1,55 @@
+{
+    "packageName": "com.googlecode.opentyrian",
+    "title": "Open Tyrian",
+    "description": "Port of Open Tyrian from pleya's fork of Commander Genius and other LibSDL games.",
+    "players": [
+        1,2
+    ],
+    "genres": [
+        "Retro"
+    ],
+    "languages": ["en"],
+    "releases": [
+        {
+            "name": "2.1.25",
+            "versionCode": 2125,
+            "uuid": "bb1cf719-ab69-4301-9f9e-57ab7faa7b99",
+            "date": "2021-02-10T00:00:00Z",
+            "latest": true,
+            "url": "http://github.com/HeinousGames/commandergenius/blob/sdl_android/project/app/build/outputs/apk/release/app-release.apk?raw=true",
+            "size": 5000,
+            "md5sum": "a5b0f82d54df5f551a64295e43771a10"
+        }
+    ],
+    "discover": "http://example.org/game-1.jpg",
+    "media": [
+        {
+            "type": "image",
+            "url": "http://example.org/game-1.jpg",
+            "thumb": "http://example.org/game-1.thumbnail.jpg"
+        },
+        {
+            "type": "video",
+            "url": "https://vimeo.com/141878938"
+        }
+    ],
+    "developer": {
+        "uuid": "46733877-abbe-447f-9595-fdeb13874cca",
+        "name": "Steven Hanus",
+        "supportEmail": "ministeve412@gmail.com",
+        "supportPhone": null,
+        "founder": true,
+        "website": "https://www.heinousgames.net/"
+    },
+    "contentRating": "Everyone",
+    "website": "http://www.heinousgames.net",
+    "firstPublishedAt": "2021-02-10T00:00:00Z",
+    "inAppPurchases": false,
+    "overview": "Released in February 2021 by Steven Hanus.",
+    "premium": false,
+    "rating": {
+        "likeCount": 69,
+        "average": 4.20,
+        "count": 69
+    }
+}
