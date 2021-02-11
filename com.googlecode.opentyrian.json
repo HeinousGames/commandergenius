@@ -14,10 +14,10 @@
             "name": "2.1.25",
             "versionCode": 2125,
             "uuid": "bb1cf719-ab69-4301-9f9e-57ab7faa7b99",
-            "date": "2021-02-10T00:00:00Z",
+            "date": "2021-02-11T00:00:00Z",
             "latest": true,
-            "url": "http://github.com/HeinousGames/commandergenius/blob/sdl_android/project/app/build/outputs/apk/release/app-release.apk?raw=true",
-            "size": 5000,
+            "url": "http://github.com/HeinousGames/commandergenius/blob/sdl_android/project/app/build/outputs/apk/debug/app-debug.apk?raw=true",
+            "size": 9456,
             "md5sum": "a5b0f82d54df5f551a64295e43771a10"
         }
     ],
@@ -43,7 +43,7 @@
     },
     "contentRating": "Everyone",
     "website": "http://www.heinousgames.net",
-    "firstPublishedAt": "2021-02-10T00:00:00Z",
+    "firstPublishedAt": "2021-02-11T00:00:00Z",
     "inAppPurchases": false,
     "overview": "Released in February 2021 by Steven Hanus.",
     "premium": false,
