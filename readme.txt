@@ -1,3 +1,33 @@
+OUYA README
+===========
+
+This is a fork of pelya's fork of commander genius and other games. This fork was specifically done to create a version of Open Tyrian to use on the Ouya.
+
+
+BUILDING/INSTALLING
+===================
+
+The original release build instructions say to run './build.sh opentyrian' in the root folder to compile and build a release apk. The copyAssets script (called from the build script) should be copying the zip files into the android assets folder. For some reason it is removing them (or not copying them at all) and the release apk cannot find the zip files necessary to run. Manually copying the zip files from the ApplicationData dir into the assets dir, and then building a debug variant from an IDE, results in an apk that has the zip files. The debug apk that the IDE spits out will not be made for installation though. We still need to use the original build script to make a workable version. So, after manually copying the zip into the assets dir, build the debug app by running './build.sh -i -r debug opentyrian' from the commander genius root folder. This will build the app, install it on your connected device (or emulator), and run the installed version. You can probably run the same command without the -i -r tags.
+
+Changing buildenabled to false in the release variant of the build.gradle file did not help include the assets files in the release apk.
+
+Whatever is removing the assets files also might be removing the ouya_icon.png file from the drawable-xhdpi folder during building. I added a keep file in the res/raw folder to make sure the ouya_icon thumbnail is not removed during building.
+
+The Open Tyrian AndroidSettings.cfg file had to be modified to allow overriding the back button to the OUYA_A button. This config setting might be controlling other things such as touch screen capabilities and being able to override other buttons.
+
+
+ISSUES/TODO
+===========
+When playing your first game, you must tap the phone screen to bypass the tutorial. For the OUYA you must use the mouse cursor pad on the controller to imitate the touch. We want to move this to a button.
+
+Rear shooting can only be activated by touching the button in the top corner of the screen. We'd like to map this to a button.
+
+Have to fix release build from removing required zip assets files.
+
+
+ORIGINAL README (from pelya's fork; covers installation, building, etc.)
+=======================================================================================
+
 This is SDL 1.2 ported to Google Android (also bunch of other libs included).
 Sources or patches of the individual games are in the directory project/jni/application.
 
